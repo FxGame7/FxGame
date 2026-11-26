@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Переливашка: сортировка цветов</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#12263a">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Переливашка">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20width%3D%22512%22%20height%3D%22512%22%20xmlns%3Ac2pa%3D%22http%3A%2F%2Fc2pa.org%2Fmanifest%22%3E%0A%3Ctitle%3EFxGame%3C%2Ftitle%3E%0A%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22120%22%20fill%3D%22%230f2233%22%2F%3E%0A%3Cg%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%2260%22%3E%0A%3Cpath%20d%3D%22M100%20372V140H270%22%20stroke%3D%22%23ffffff%22%2F%3E%0A%3Cpath%20d%3D%22M100%20256H218%22%20stroke%3D%22%23ffffff%22%2F%3E%0A%3Cpath%20d%3D%22M412%20252L292%20372%22%20stroke%3D%22%23e8604c%22%2F%3E%0A%3Cpath%20d%3D%22M292%20252L412%20372%22%20stroke%3D%22%230f2233%22%20stroke-width%3D%2274%22%2F%3E%0A%3Cpath%20d%3D%22M292%20252L412%20372%22%20stroke%3D%22%23f2c14e%22%2F%3E%0A%3C%2Fg%3E%0A%3Cmetadata%3E%3Cc2pa%3Amanifest%3EAAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTphNjRkMTI4NS0zMGE4LTQ5ODQtYTQxMy0xYTQwM2U5ZTNhZDQAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaMKO0P%2BbA7iq0KMDxZrbK3cAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDpjOGRkYzY4Zi0yZjYwLTQ0NzctOTY2NS02YTUxNjI4YTNhZGNscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoBUjEW1%2FsG%2F5%2F8PaOIAyzOAAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggso3en1tAPYbUVV2KYNEBcb7JJJbJ9w%2BxtMjacvaE2JakZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaNSt50VYDa5XyexrX%2F9Lzc4AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIACZxqlRmvtCSFG6CWfV4SgATBQT2c9OJ1Hcjw7ivN2FZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GQIwZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmE2NGQxMjg1LTMwYTgtNDk4NC1hNDEzLTFhNDAzZTllM2FkNC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmNmOWI2YWQzLThjZTAtNGUxMy05ZWY2LWI5OTAwYTA4YTMyM3JjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCCyjd6fW0A9htRVXYpg0QFxvskklsn3D7G0yNpy9oTYlqJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggLvTo%2FW7s%2BS91MR0y5iMHsLnJBe1Noko7h90aBOp6OcaiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggSnN38UhJr8sWBps8fOlPaMLjdFF%2F%2F%2BQUls2vUJAE7a90Y2xhaW1fZ2VuZXJhdG9yX2luZm%2BjZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g%2FoGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd%2F3cyjxFA3Qo5S46fX0%2FihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB%2FwQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB%2FwQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj%2BOPEz5o%2BnMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn%2FaArXyTwFAZfKrPzxF2vPoJNf1%2BUCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9%2B1rdDwSPLMOPOjKuiXjoU%2FpUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQDJDLpKhvT28H3vemscI%2FJVD%2BK1nCHGnZZgubsrt4FJ6%2F4VISTkB2Aaowh%2Fvr2%2F%2B2u4NCMPb2TCWXVRozPNykvM%3D%3C%2Fc2pa%3Amanifest%3E%3C%2Fmetadata%3E%3C%2Fsvg%3E%0A">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;user-select:none}
+:root{--w:clamp(42px,10.5vw,64px);--s:calc(var(--w)*.62)}
+html,body{margin:0;height:100%;overflow:hidden;font-family:"Trebuchet MS",system-ui,sans-serif;color:#fff;background:radial-gradient(120% 90% at 50% 0%,#1f6f78 0%,#12263a 70%)}
+.off{display:none!important}
+#app,#menu{height:100%;display:flex;flex-direction:column;align-items:center;padding:max(10px,env(safe-area-inset-top)) 10px max(10px,env(safe-area-inset-bottom))}
+#menu{overflow-y:auto}
+header{width:100%;max-width:760px;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:4px 6px}
+#lv{font-size:22px;font-weight:700}
+#mv{font-size:19px;opacity:.9;min-width:110px;text-align:right}
+.t{font:inherit;font-size:18px;color:#fff;background:rgba(255,255,255,.16);border:0;border-radius:12px;padding:10px 12px;cursor:pointer}
+#tubes{flex:1;display:flex;flex-wrap:wrap;justify-content:center;align-content:center;gap:calc(var(--w)*.5) calc(var(--w)*.28);max-width:760px;padding:24px 14px 10px}
+.tube{width:var(--w);height:calc(var(--s)*4 + 18px);border:3px solid var(--tb,rgba(255,255,255,.75));border-top:none;border-radius:4px 4px calc(var(--w)/2) calc(var(--w)/2);background:var(--tbg,rgba(255,255,255,.1));display:flex;flex-direction:column-reverse;padding:3px;gap:2px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.tube.sel{transform:translateY(-16px);box-shadow:0 0 22px rgba(242,193,78,.85);border-color:#f2c14e}
+.tube.hint{box-shadow:0 0 22px rgba(120,255,160,.95);border-color:#7dffa6}
+.tube.pop{animation:pop .3s}
+@keyframes pop{50%{transform:scale(1.1)}}
+.tube i{display:block;height:var(--s);border-radius:7px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.18),inset 0 3px 0 rgba(255,255,255,.28)}
+nav{display:flex;gap:8px;padding:8px 0 4px}
+.b{min-width:76px;min-height:64px;padding:8px 8px;font:inherit;font-size:26px;line-height:1;border:0;border-radius:16px;background:rgba(255,255,255,.16);color:#fff;cursor:pointer}
+.b small{display:block;font-size:13px;margin-top:5px}
+.b:disabled{opacity:.35}
+.b:active:not(:disabled),.mb:active,.big:active{transform:scale(.97)}
+h1{margin:14px 0 4px;font-size:38px}
+.coins{font-size:24px;margin-bottom:12px;color:#f2c14e;font-weight:700}
+#modes{width:100%;max-width:460px;display:flex;flex-direction:column;gap:10px}
+.mb{font:inherit;color:#fff;border:0;border-radius:18px;padding:14px 18px;text-align:left;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:2px 10px}
+.mb b{font-size:24px}.mb em{font-style:normal;font-size:18px;opacity:.9;grid-row:1}.mb span{font-size:16px;opacity:.9;grid-column:1/3}
+.mb.c{background:#1f8a8f}.mb.t{background:#c98a00}.mb.m{background:#7b4fc9}.mb.h{background:#c43c3c}
+.mrow{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap;justify-content:center}
+.dot{position:relative}.dot::after{content:"";position:absolute;top:6px;right:6px;width:14px;height:14px;border-radius:50%;background:#ff4d4d;border:2px solid #fff}
+#modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(10,20,32,.72);z-index:5}
+#modal.on{display:flex}
+.card{background:#fff;color:#12263a;border-radius:24px;padding:22px 22px;text-align:center;width:min(92vw,440px);max-height:92vh;overflow-y:auto}
+.card h2{margin:0 0 6px;font-size:28px}
+.card p{margin:0 0 14px;font-size:19px}
+.big,.sm,.item{display:block;width:100%;font:inherit;border:0;border-radius:14px;cursor:pointer;margin:8px 0 0}
+.big{font-size:21px;font-weight:700;padding:14px;background:#1f6f78;color:#fff}
+.big.ad{background:#f2c14e;color:#12263a}
+.sm{font-size:18px;padding:11px;background:#e6edf2;color:#12263a}
+.item{font-size:18px;padding:12px 14px;background:#eef3f6;color:#12263a;display:flex;justify-content:space-between}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:8px}
+.cell{border-radius:10px;background:#e6edf2;padding:6px 0;font-size:18px;font-weight:700}
+.cell small{display:block;font-size:11px;font-weight:400}
+.cell.got{background:#43a047;color:#fff}.cell.now{background:#f2c14e;outline:3px solid #12263a}
+.row{display:flex;justify-content:space-between;padding:8px 4px;border-bottom:1px solid #dde5ea;font-size:18px;text-align:left}
+.tabs{display:flex;gap:6px;margin-bottom:8px}.tab{flex:1;font:inherit;font-size:15px;padding:9px 2px;border:0;border-radius:10px;background:#e6edf2;color:#12263a;cursor:pointer}.tab.on{background:#1f6f78;color:#fff}
+.brand{display:flex;align-items:center;gap:10px;margin:2px 0 16px;font-size:20px;font-weight:700;opacity:.9}.brand svg{width:38px;height:38px}
+#splash{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;background:radial-gradient(90% 70% at 50% 35%,#16384a 0%,#0b1624 75%);transition:opacity .5s,visibility .5s}
+#splash.out{opacity:0;visibility:hidden;pointer-events:none}
+.slogo{width:104px;height:104px;filter:drop-shadow(0 16px 36px rgba(31,138,143,.4));animation:logoin .5s cubic-bezier(.2,.8,.2,1) both}
+.slogo .d{animation:draw .5s ease-out both}
+.sword{font-size:42px;font-weight:700;letter-spacing:.01em;animation:up .6s .85s both}
+.strack{width:176px;height:4px;border-radius:2px;background:rgba(255,255,255,.15);overflow:hidden}
+#sbar{height:100%;width:0;background:#f2c14e;border-radius:2px;transition:width .6s ease-out}
+@keyframes draw{from{stroke-dasharray:1;stroke-dashoffset:1;opacity:0}to{stroke-dasharray:1;stroke-dashoffset:0;opacity:1}}
+@keyframes logoin{from{transform:scale(.85);opacity:0}}
+@keyframes up{from{opacity:0;transform:translateY(10px)}}
+#toast{position:fixed;top:78px;left:50%;transform:translateX(-50%);background:#fff;color:#12263a;padding:12px 20px;border-radius:14px;font-size:18px;opacity:0;pointer-events:none;transition:opacity .25s;text-align:center;max-width:90vw;z-index:9}
+#toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="splash" role="status" aria-label="FxGame"><svg class="slogo" viewBox="0 0 512 512" aria-hidden="true"><rect x="2" y="2" width="508" height="508" rx="118" fill="#0f2233" stroke="rgba(255,255,255,.22)" stroke-width="4"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="60"><path class="d" pathLength="1" style="animation-delay:.1s" stroke="#fff" d="M100 372V140H270"/><path class="d" pathLength="1" style="animation-delay:.3s" stroke="#fff" d="M100 256H218"/><path class="d" pathLength="1" style="animation-delay:.45s" stroke="#e8604c" d="M412 252L292 372"/><path class="d" pathLength="1" style="animation-delay:.6s" stroke="#0f2233" stroke-width="74" d="M292 252L412 372"/><path class="d" pathLength="1" style="animation-delay:.6s" stroke="#f2c14e" d="M292 252L412 372"/></g></svg><div class="sword">FxGame</div><div class="strack"><div id="sbar"></div></div></div>
+<div id="menu">
+  <h1>Переливашка</h1>
+  <div class="coins" id="coins"></div>
+  <div id="modes"></div>
+  <div class="mrow">
+    <button class="b" id="cal" onclick="calendar()">🎁<small>Календарь</small></button>
+    <button class="b" onclick="shop()">🛒<small>Магазин</small></button>
+    <button class="b" id="snd" onclick="toggleSnd()"></button>
+    <button class="b" id="mus" onclick="toggleMus()"></button>
+    <button class="b off" id="scut" onclick="shortcut()">📲<small>Установить</small></button>
+  </div>
+  <div class="brand"><svg viewBox="0 0 512 512" aria-hidden="true"><rect x="2" y="2" width="508" height="508" rx="118" fill="#0f2233" stroke="rgba(255,255,255,.22)" stroke-width="4"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="60"><path stroke="#fff" d="M100 372V140H270"/><path stroke="#fff" d="M100 256H218"/><path stroke="#e8604c" d="M412 252L292 372"/><path stroke="#0f2233" stroke-width="74" d="M292 252L412 372"/><path stroke="#f2c14e" d="M292 252L412 372"/></g></svg><span>FxGame</span></div>
+</div>
+<div id="app" class="off">
+  <header><button class="t" onclick="menu()">☰ Меню</button><div id="lv"></div><div id="mv"></div></header>
+  <div id="tubes"></div>
+  <nav>
+    <button class="b" id="undo" onclick="undo()">↶<small>Отмена</small></button>
+    <button class="b" onclick="restart()">⟳<small>Заново</small></button>
+    <button class="b" id="hint" onclick="hint()">💡<small>Подсказка</small></button>
+    <button class="b" id="add" onclick="addTube()">＋<small>Пробирка</small></button>
+  </nav>
+</div>
+<div id="modal"><div class="card" id="mc"></div></div>
+<div id="toast"></div>
+<script>
+const PAL={
+ def:['#e53935','#1e88e5','#43a047','#fdd835','#8e24aa','#fb8c00','#00acc1','#ec407a','#6d4c41','#9ccc65','#90a4ae'],
+ contrast:['#E69F00','#56B4E9','#009E73','#F0E442','#0072B2','#D55E00','#CC79A7','#000000','#ffffff','#999999','#8bc34a'],
+ pastel:['#ff8a80','#82b1ff','#a5d6a7','#fff59d','#ce93d8','#ffcc80','#80deea','#f48fb1','#bcaaa4','#c5e1a5','#b0bec5'],
+ neon:['#ff1744','#2979ff','#00e676','#ffea00','#d500f9','#ff9100','#00e5ff','#ff4081','#ffffff','#76ff03','#651fff']};
+const SH={
+ bonus:[['hint3','Подсказки ×3',60],['hint10','Подсказки ×10',150],['tube2','Пробирки ×2',80],['tube5','Пробирки ×5',170]],
+ bg:[['lagoon','Лагуна',0],['sunset','Закат',150],['forest','Лес',200],['space','Космос',250],['sakura','Сакура',300]],
+ tube:[['glass','Стекло',0],['ice','Лёд',250],['gold','Золото',350]],
+ pal:[['def','Классика',0],['contrast','Контраст',150],['pastel','Пастель',200],['neon','Неон',300]]};
+const TABN={bonus:'Бонусы',bg:'Фоны',tube:'Пробирки',pal:'Цвета'},KEY={bg:'bg',tube:'tb',pal:'pal'};
+const BG={lagoon:'radial-gradient(120% 90% at 50% 0%,#1f6f78 0%,#12263a 70%)',sunset:'linear-gradient(180deg,#ff9966,#c2406b 55%,#3a1c5a)',forest:'radial-gradient(120% 90% at 50% 0%,#3f8f4f,#10301f 75%)',space:'radial-gradient(circle at 20% 15%,#4b2a8a,#0b0b2b 60%)',sakura:'linear-gradient(180deg,#f9c6d8,#c785b0 60%,#5a3d7a)'};
+const TB={glass:['rgba(255,255,255,.75)','rgba(255,255,255,.1)'],ice:['#bdefff','rgba(150,220,255,.22)'],gold:['#f2c14e','rgba(242,193,78,.18)']};
+function skin(){const b=BG[S.bg],r=document.documentElement;r.style.background=b;document.body.style.background=b;r.style.setProperty('--tb',TB[S.tb][0]);r.style.setProperty('--tbg',TB[S.tb][1])}
+
+/* ---------- переводы: ключ = русский текст, ru / en / tr ---------- */
+const DICT=[
+['Установить','Install','Yükle'],['Ярлык добавлен! +100 🪙','Shortcut added! +100 🪙','Kısayol eklendi! +100 🪙'],['Ярлык','Shortcut','Kısayol'],['Музыка','Music','Müzik'],['Переливашка','Pour Puzzle','Renk Dök'],['Календарь наград','Daily rewards','Günlük ödüller'],['Календарь','Calendar','Takvim'],['Магазин','Shop','Mağaza'],['Лидеры','Leaders','Liderler'],['Звук','Sound','Ses'],['В меню','Menu','Menü'],['Меню','Menu','Menü'],
+['Отмена','Undo','Geri al'],['Заново','Restart','Yeniden'],['Подсказка','Hint','İpucu'],['Пробирка','Tube','Tüp'],
+['Уровень пройден!','Level complete!','Bölüm tamam!'],['Уровень ','Level ','Bölüm '],['очков','points','puan'],['Ваши очки: ','Your score: ','Puanın: '],
+['Удвоить монеты','Double coins','Parayı ikiye katla'],['Дальше','Next','İleri'],['Время вышло!','Time is up!','Süre doldu!'],['Ходы закончились','Out of moves','Hamlen bitti'],
+['Продолжить игру?','Continue?','Devam edilsin mi?'],['+30 секунд за 50 🪙','+30 seconds for 50 🪙','50 🪙 karşılığı +30 saniye'],['+8 ходов за 50 🪙','+8 moves for 50 🪙','50 🪙 karşılığı +8 hamle'],
+['Продолжить бесплатно','Continue for free','Ücretsiz devam et'],['Реклама сейчас недоступна, попробуйте позже','Ad is unavailable now, try again later','Reklam şu an yok, sonra tekrar dene'],
+['Ходов не осталось. Нажмите «Отмена» или «Пробирка»','No moves left. Press Undo or Tube','Hamle kalmadı. Geri al veya Tüp\'e bas'],['Ходов нет. Нажмите «Отмена»','No moves. Press Undo','Hamle yok. Geri al\'a bas'],
+['Перелейте в подсвеченную пробирку','Pour into the highlighted tube','Parlayan tüpe dök'],['Не хватает монет','Not enough coins','Yeterli para yok'],
+['Заходите каждый день: по 50 🪙','Come back every day: 50 🪙 each','Her gün gel: 50 🪙'],['Забрать 50 🪙','Claim 50 🪙','50 🪙 al'],['Все 30 наград получены!','All 30 rewards claimed!','30 ödülün hepsi alındı!'],['Следующая награда завтра','Next reward tomorrow','Sonraki ödül yarın'],['Закрыть','Close','Kapat'],
+['подсказок ','hints ','ipucu '],['пробирок ','tubes ','tüp '],['Подсказки','Hints','İpuçları'],['Пробирки','Tubes','Tüpler'],['✓ выбрано','✓ selected','✓ seçili'],['выбрать','select','seç'],
+['Бонусы','Boosts','Bonuslar'],['Фоны','Backgrounds','Arka planlar'],['Цвета','Colors','Renkler'],
+['Лагуна','Lagoon','Lagün'],['Закат','Sunset','Gün batımı'],['Лес','Forest','Orman'],['Космос','Space','Uzay'],['Сакура','Sakura','Sakura'],['Стекло','Glass','Cam'],['Золото','Gold','Altın'],['Лёд','Ice','Buz'],
+['Классика','Classic','Klasik'],['Контраст','High contrast','Yüksek kontrast'],['Пастель','Pastel','Pastel'],['Неон','Neon','Neon'],
+['Без ограничений. Играйте в своё удовольствие.','No limits. Play at your own pace.','Sınırsız. Keyfine göre oyna.'],['Успейте собрать цвета, пока идёт таймер.','Sort the colors before the timer runs out.','Süre bitmeden renkleri sırala.'],
+['Уложитесь в лимит ходов.','Finish within the move limit.','Hamle sınırı içinde bitir.'],['Время и ходы сразу, больше цветов, без подсказок и отмены. Награда втрое больше.','Timer and move limit together, more colors, no hints or undo. Triple rewards.','Süre ve hamle sınırı birlikte, daha çok renk, ipucu ve geri alma yok. Üç kat ödül.'],
+['На время','Time attack','Zamana karşı'],['Хардкор','Hardcore','Zor mod'],['Ходов: ','Moves: ','Hamle: '],['Ходы','Moves','Hamle'],
+['Загрузка…','Loading…','Yükleniyor…'],['Таблица лидеров работает в игре на Яндекс Играх.','The leaderboard works in the game on Yandex Games.','Lider tablosu Yandex Games\'te çalışır.'],['Пока никого нет','Nobody here yet','Henüz kimse yok'],['Игрок','Player','Oyuncu'],
+['Войти, чтобы попасть в таблицу','Sign in to join the leaderboard','Tabloya girmek için giriş yap'],['Не удалось загрузить таблицу. Попробуйте позже.','Could not load the leaderboard. Try again later.','Tablo yüklenemedi. Sonra tekrar dene.']
+].sort((a,b)=>b[0].length-a[0].length);
+const pick=l=>{l=(l||'ru').slice(0,2);return['ru','be','uk','kk','uz','hy','az','ka','ky','tg','tk'].includes(l)?'ru':l==='tr'?'tr':'en'};
+let lang=pick(navigator.language);
+function L(s){if(lang==='ru')return s;const i=lang==='en'?1:2;for(const d of DICT)if(s.includes(d[0]))s=s.split(d[0]).join(d[i]);return s}
+const okT=t=>t.parentNode&&t.parentNode.tagName!=='SCRIPT'&&!(t.parentNode.closest&&t.parentNode.closest('[data-nt]'));
+function tw(n){const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT),a=[];let x;while(x=w.nextNode())a.push(x);a.forEach(t=>{if(okT(t))t.data=L(t.data)})}
+function i18n(){if(lang==='ru')return;document.documentElement.lang=lang;document.title=L(document.title);tw(document.body);
+  new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===3){if(okT(n))n.data=L(n.data)}else if(n.nodeType===1)tw(n)}))).observe(document.body,{childList:true,subtree:true})}
+const MODES={
+ c:{n:'Классика',d:'Без ограничений. Играйте в своё удовольствие.',base:3},
+ t:{n:'На время',d:'Успейте собрать цвета, пока идёт таймер.',base:3,time:1},
+ m:{n:'Ходы',d:'Уложитесь в лимит ходов.',base:3,mv:1},
+ h:{n:'Хардкор',d:'Время и ходы сразу, больше цветов, без подсказок и отмены. Награда втрое больше.',base:6,time:1,mv:1,hard:1}};
+const CC={c:5,t:8,m:8,h:25},SB={c:100,t:120,m:120,h:300},CAP=4;
+const $=id=>document.getElementById(id);
+document.addEventListener('contextmenu',e=>e.preventDefault());
+const esc=s=>String(s).replace(/[&<>"]/g,c=>'&#'+c.charCodeAt(0)+';');
+const D={coins:0,prog:{c:1,t:1,m:1,h:1},score:0,wins:0,cal:{n:0,last:''},inv:{hint:1,tube:1},pal:'def',bg:'lagoon',tb:'glass',own:['def','lagoon','glass'],mute:0,music:1};
+let S=JSON.parse(JSON.stringify(D));
+try{Object.assign(S,JSON.parse(localStorage.getItem('pereliv2'))||{});S.prog.c=Math.max(S.prog.c,parseInt(localStorage.getItem('pereliv_lvl'))||1)}catch(e){}
+let player=null,cloudT=0;
+function save(){S.ts=Date.now();try{localStorage.setItem('pereliv2',JSON.stringify(S))}catch(e){}
+  clearTimeout(cloudT);cloudT=setTimeout(()=>{try{player&&player.setData({s:S}).catch(()=>{})}catch(e){}},2500)}
+let COLORS=PAL[S.pal]||PAL.def,mode='c',M=MODES.c,level=1,tubes=[],sel=-1,hintTo=-1,hist=[],moves=0,extra=false,over=true,playing=false,time=0,T0=0,lim=0,why='',ysdk=null,ctx=null,adMute=false,lastTarget=-1,startState='';
+
+/* ---------- SDK ---------- */
+function gp(on){try{const g=ysdk&&ysdk.features.GameplayAPI;if(g){(on&&playing&&!over)?g.start():g.stop()}}catch(e){}}
+function showInter(cb){
+  if(!ysdk){cb();return}
+  try{ysdk.adv.showFullscreenAdv({callbacks:{onOpen:()=>{adMute=true;gp(false)},onClose:()=>{adMute=false;cb()},onError:()=>{adMute=false;cb()}}})}catch(e){cb()}
+}
+function showReward(ok){
+  if(!ysdk){ok();return}
+  let got=false;const bad=()=>{adMute=false;toast('Реклама сейчас недоступна, попробуйте позже')};
+  try{ysdk.adv.showRewardedVideo({callbacks:{onOpen:()=>{adMute=true;gp(false)},onRewarded:()=>{got=true},onClose:()=>{adMute=false;if(got)ok()},onError:bad}})}catch(e){bad()}
+}
+function submit(){try{ysdk&&ysdk.leaderboards.setScore('score',S.score).catch(()=>{})}catch(e){}}
+
+/* ---------- звук ---------- */
+let lastSec=99,master=null,musT=0,mi=3;
+const SC=[261.6,293.7,329.6,392,440,523.3,587.3,659.3];
+function tone(f,d,type,v,t0,to){
+  if(S.mute||adMute||!ctx||!master)return;
+  try{const o=ctx.createOscillator(),g=ctx.createGain(),t=ctx.currentTime+(t0||0);
+    o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(to)o.frequency.exponentialRampToValueAtTime(to,t+d);
+    g.gain.setValueAtTime(v||.1,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);
+    o.connect(g);g.connect(master);o.start(t);o.stop(t+d+.02)}catch(x){}
+}
+function noise(d,f0,f1,v){
+  if(S.mute||adMute||!ctx||!master)return;
+  try{const n=ctx.sampleRate*d|0,b=ctx.createBuffer(1,n,ctx.sampleRate),a=b.getChannelData(0),t=ctx.currentTime;
+    for(let i=0;i<n;i++)a[i]=Math.random()*2-1;
+    const s=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();
+    s.buffer=b;f.type='bandpass';f.Q.value=3;f.frequency.setValueAtTime(f0,t);f.frequency.exponentialRampToValueAtTime(f1,t+d);
+    g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);
+    s.connect(f);f.connect(g);g.connect(master);s.start(t)}catch(x){}
+}
+const SFX={
+  ui:()=>tone(520,.05,'triangle',.05),
+  tap:()=>tone(660,.07,'triangle',.07),
+  drop:()=>tone(420,.07,'triangle',.06),
+  bad:()=>{tone(150,.16,'sawtooth',.05);tone(120,.2,'sawtooth',.05,.08)},
+  pour:k=>{noise(.22+k*.07,450,1500,.4);for(let i=0;i<k;i++)tone(300+i*80,.1,'sine',.09,i*.08,640+i*80)},
+  done:()=>[784,988,1319].forEach((f,i)=>{tone(f,.5,'sine',.09,i*.09);tone(f*2,.4,'sine',.03,i*.09)}),
+  undo:()=>tone(500,.14,'triangle',.07,0,250),
+  hint:()=>[880,1175,1568].forEach((f,i)=>tone(f,.18,'sine',.07,i*.07)),
+  add:()=>tone(300,.2,'sine',.1,0,700),
+  coin:()=>{tone(988,.08,'square',.04);tone(1319,.3,'square',.04,.08)},
+  tick:()=>tone(1000,.05,'square',.04),
+  win:()=>[523,659,784,1047,1319,1568].forEach((f,i)=>{tone(f,.45,'triangle',.09,i*.1);tone(f*2,.3,'sine',.03,i*.1)}),
+  fail:()=>[392,330,262,196].forEach((f,i)=>tone(f,.3,'triangle',.09,i*.16))
+};
+const TR=[
+ {r:261.6,sc:[0,2,4,7,9],pr:[0,3,4,2],ms:420,den:.55,w:'sine'},
+ {r:220,sc:[0,3,5,7,10],pr:[0,2,3,1],ms:520,den:.45,w:'triangle'},
+ {r:196,sc:[0,2,4,6,7,9,11],pr:[0,4,3,5],ms:480,den:.5,w:'sine'},
+ {r:174.6,sc:[0,2,3,7,8],pr:[0,1,4,2],ms:600,den:.4,w:'triangle'},
+ {r:293.7,sc:[0,2,4,5,7,9,11],pr:[0,5,3,4],ms:380,den:.6,w:'sine'}];
+let mt=0,mk=0,mbar=0;
+function mstep(){
+  if(!S.music||S.mute||adMute||document.hidden||!ctx)return;
+  const T=TR[mt],n=T.sc.length,deg=i=>T.r*Math.pow(2,(T.sc[((i%n)+n)%n]+12*Math.floor(i/n))/12),d=T.pr[mbar%T.pr.length],k=mk%8,bar=T.ms*8/1000;
+  if(k===0){[0,2,4].forEach(j=>tone(deg(d+j),bar*1.1,'sine',.022));tone(deg(d)/2,bar/2,'triangle',.05)}
+  if(k===4)tone(deg(d+4)/2,bar/2,'triangle',.04);
+  if(Math.random()<T.den)tone(deg(d+(Math.random()*7|0))*(Math.random()<.3?2:1),.7,T.w,.035);
+  if(++mk%8===0){mbar++;if(mbar%(T.pr.length*3)===0)mt=(mt+1+(Math.random()*(TR.length-1)|0))%TR.length}
+}
+function mloop(){mstep();setTimeout(mloop,TR[mt].ms)}
+addEventListener('pointerdown',e=>{
+  if(!ctx){try{ctx=new(window.AudioContext||window.webkitAudioContext)();master=ctx.createGain();master.gain.value=.9;master.connect(ctx.destination);mloop()}catch(x){}}
+  if(ctx&&ctx.state==='suspended'&&!document.hidden)ctx.resume();
+  if(e.target.closest&&e.target.closest('button'))SFX.ui();
+});
+document.addEventListener('visibilitychange',()=>{if(ctx){document.hidden?ctx.suspend():ctx.resume()}});
+function toggleSnd(){S.mute=S.mute?0:1;save();menu()}
+function toggleMus(){S.music=S.music?0:1;save();menu()}
+let canShortcut=false;
+function shortcut(){
+  try{ysdk.shortcut.showPrompt().then(r=>{
+    if(r&&r.outcome==='accepted'){canShortcut=false;if(!S.scut){S.scut=1;S.coins+=100;SFX.coin();toast('Ярлык добавлен! +100 🪙')}save();menu()}
+  }).catch(()=>{})}catch(e){}
+}
+
+/* ---------- окна ---------- */
+function modal(h){$('mc').innerHTML=h;$('modal').classList.add('on')}
+function closeModal(){$('modal').classList.remove('on')}
+function toast(m){const e=$('toast');e.textContent=m;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2600)}
+function coinsUI(){$('coins').textContent='🪙 '+S.coins+'   ★ '+S.score}
+
+/* ---------- меню ---------- */
+function menu(){
+  closeModal();over=true;playing=false;gp(false);
+  $('app').classList.add('off');$('menu').classList.remove('off');coinsUI();
+  $('modes').innerHTML=Object.keys(MODES).map(k=>`<button class="mb ${k}" onclick="start('${k}')"><b>${MODES[k].n}</b><em>Уровень ${S.prog[k]}</em><span>${MODES[k].d}</span></button>`).join('');
+  $('cal').classList.toggle('dot',canClaim());
+  $('snd').innerHTML=(S.mute?'🔇':'🔊')+'<small>Звук</small>';
+  $('mus').innerHTML=(S.music?'🎵':'🔕')+'<small>Музыка</small>';
+  $('scut').classList.toggle('off',!canShortcut);
+}
+function start(m){mode=m;M=MODES[m];level=S.prog[m];closeModal();$('menu').classList.add('off');$('app').classList.remove('off');gen()}
+
+/* ---------- игра ---------- */
+function gen(){
+  const n=Math.min(M.base+(level>>1),COLORS.length);let t,tries=0;
+  do{
+    const pool=[];for(let c=0;c<n;c++)for(let k=0;k<CAP;k++)pool.push(c);
+    for(let i=pool.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[pool[i],pool[j]]=[pool[j],pool[i]]}
+    t=[];for(let i=0;i<n;i++)t.push(pool.slice(i*CAP,i*CAP+CAP));
+  }while(t.some(x=>x.every(v=>v===x[0]))&&++tries<50);
+  t.push([],[]);startState=JSON.stringify(t);
+  T0=M.time?(M.hard?25+n*9:30+n*14):0;lim=M.mv?(M.hard?n*5+2:n*6+4):0;
+  reset();
+}
+function reset(){tubes=JSON.parse(startState);sel=-1;hintTo=-1;hist=[];moves=0;extra=false;over=false;playing=true;time=T0;lastSec=99;render();gp(true)}
+function restart(){closeModal();reset()}
+function canPour(a,b){
+  if(a===b)return 0;const A=tubes[a],B=tubes[b];
+  if(!A.length||B.length>=CAP)return 0;
+  const c=A[A.length-1];if(B.length&&B[B.length-1]!==c)return 0;
+  let k=0;while(k<A.length&&A[A.length-1-k]===c)k++;
+  if(!B.length&&k===A.length)return 0;
+  return Math.min(k,CAP-B.length);
+}
+function pour(a,b){
+  const k=canPour(a,b);if(!k)return false;
+  hist.push(JSON.stringify(tubes));
+  for(let x=0;x<k;x++)tubes[b].push(tubes[a].pop());
+  moves++;lastTarget=b;SFX.pour(k);{const B=tubes[b];if(B.length===CAP&&B.every(v=>v===B[0]))setTimeout(SFX.done,220)}check();return true;
+}
+function hasMove(){for(let a=0;a<tubes.length;a++)for(let b=0;b<tubes.length;b++)if(canPour(a,b))return true;return false}
+function check(){
+  if(tubes.every(t=>!t.length||(t.length===CAP&&t.every(v=>v===t[0])))){
+    over=true;gp(false);setTimeout(SFX.win,380);
+    setTimeout(win,450);
+  }else if(M.mv&&moves>=lim){fail('m','Ходы закончились')}
+  else if(!hasMove()){toast('Ходов не осталось. Нажмите «Отмена» или «Пробирка»')}
+}
+function tap(i){
+  if(over)return;hintTo=-1;
+  if(sel<0){if(tubes[i].length){sel=i;SFX.tap()}}
+  else if(sel===i){sel=-1;SFX.drop()}
+  else if(pour(sel,i)){sel=-1}
+  else{SFX.bad();sel=tubes[i].length?i:-1}
+  render();
+}
+const fmt=s=>{s=Math.ceil(s);return(s/60|0)+':'+String(s%60).padStart(2,'0')};
+function hud(){$('mv').textContent=(M.time?'⏱ '+fmt(time)+'  ':'')+(M.mv?'Ходы '+moves+'/'+lim:'Ходов: '+moves)}
+function render(){
+  $('lv').textContent=M.n+' · '+level;hud();
+  const box=$('tubes');box.innerHTML='';
+  tubes.forEach((t,i)=>{
+    const d=document.createElement('div');d.className='tube'+(i===sel?' sel':'')+(i===hintTo?' hint':'')+(i===lastTarget?' pop':'');
+    t.forEach(c=>{const s=document.createElement('i');s.style.background=COLORS[c];d.appendChild(s)});
+    d.onclick=()=>tap(i);box.appendChild(d);
+  });
+  lastTarget=-1;
+  $('undo').disabled=!hist.length||over||!!M.hard;$('add').disabled=extra||over||!!M.hard;$('hint').disabled=over||!!M.hard;
+  $('hint').lastChild.textContent='Подсказка'+(S.inv.hint?' ×'+S.inv.hint:'');
+  $('add').lastChild.textContent='Пробирка'+(S.inv.tube?' ×'+S.inv.tube:'');
+}
+function undo(){if(hist.length&&!over&&!M.hard){tubes=JSON.parse(hist.pop());moves=Math.max(0,moves-1);sel=-1;hintTo=-1;SFX.undo();render()}}
+function hint(){
+  if(over||M.hard)return;
+  const go=()=>{let a=-1,b=-1;
+    for(let i=0;i<tubes.length;i++)for(let j=0;j<tubes.length;j++)if(canPour(i,j)&&(a<0||(tubes[j].length&&!tubes[b].length))){a=i;b=j}
+    if(a<0){toast('Ходов нет. Нажмите «Отмена»');return}
+    sel=a;hintTo=b;SFX.hint();render();toast('Перелейте в подсвеченную пробирку')};
+  if(S.inv.hint>0){S.inv.hint--;save();go()}else showReward(go);
+}
+function addTube(){
+  if(over||M.hard||extra)return;
+  const go=()=>{tubes.push([]);extra=true;SFX.add();render()};
+  if(S.inv.tube>0){S.inv.tube--;save();go()}else showReward(go);
+}
+setInterval((()=>{let l=performance.now();return()=>{
+  const n=performance.now(),dt=(n-l)/1000;l=n;
+  if(!M.time||over||!playing||document.hidden||adMute||$('modal').classList.contains('on'))return;
+  time-=dt;const sc=Math.ceil(time);if(sc<=10&&sc>0&&sc!==lastSec){lastSec=sc;SFX.tick()}if(time<=0){time=0;fail('t','Время вышло!')}hud();
+}})(),250);
+
+/* ---------- победа и поражение ---------- */
+function win(){
+  const left=Math.ceil(time),pts=SB[mode]+level*10+(M.time?left*2:0)+(M.mv?(lim-moves)*3:0),co=CC[mode]+(level%5===0?10:0);
+  S.coins+=co;S.score+=pts;S.wins++;S.prog[mode]++;save();submit();setTimeout(SFX.coin,250);
+  modal(`<h2>Уровень пройден!</h2><p>+${pts} очков<br>+${co} 🪙</p>
+  <button class="big ad" onclick="this.disabled=true;showReward(()=>{S.coins+=${co};save();toast('+${co} 🪙')})">Удвоить монеты</button>
+  <button class="big" onclick="nextLvl()">Дальше</button><button class="sm" onclick="menu()">В меню</button>`);
+}
+function nextLvl(){closeModal();level=S.prog[mode];(S.wins>=3&&S.wins%3===0)?showInter(gen):gen()}
+function fail(w,msg){
+  if(over)return;over=true;why=w;gp(false);SFX.fail();render();
+  modal(`<h2>${msg}</h2><p>Продолжить игру?</p>
+  <button class="big" onclick="cont(0)">${w==='t'?'+30 секунд':'+8 ходов'} за 50 🪙</button>
+  <button class="big ad" onclick="cont(1)">Продолжить бесплатно</button>
+  <button class="sm" onclick="restart()">Заново</button><button class="sm" onclick="menu()">В меню</button>`);
+}
+function cont(ad){
+  const go=()=>{why==='t'?time=30:lim+=8;lastSec=99;over=false;closeModal();render();gp(true)};
+  if(ad)showReward(go);else if(S.coins>=50){S.coins-=50;save();go()}else toast('Не хватает монет');
+}
+
+/* ---------- календарь ---------- */
+const today=()=>new Date().toLocaleDateString('sv');
+const canClaim=()=>S.cal.n<30&&S.cal.last!==today();
+function calendar(){
+  let g='';for(let i=1;i<=30;i++)g+=`<div class="cell${i<=S.cal.n?' got':(i===S.cal.n+1&&canClaim()?' now':'')}">${i<=S.cal.n?'✓':i}<small>50</small></div>`;
+  modal(`<h2>Календарь наград</h2><p>Заходите каждый день: по 50 🪙</p><div class="grid">${g}</div>`+
+   (canClaim()?`<button class="big ad" onclick="claim()">Забрать 50 🪙</button>`:`<p>${S.cal.n>=30?'Все 30 наград получены!':'Следующая награда завтра'}</p>`)+
+   `<button class="sm" onclick="closeModal()">Закрыть</button>`);
+}
+function claim(){S.cal.n++;S.cal.last=today();S.coins+=50;save();SFX.coin();coinsUI();$('cal').classList.remove('dot');calendar()}
+
+/* ---------- магазин ---------- */
+let shopTab='bonus';
+function shop(tab){
+  if(tab)shopTab=tab;
+  let h=`<h2>Магазин</h2><p>🪙 ${S.coins} · подсказок ${S.inv.hint} · пробирок ${S.inv.tube}</p><div class="tabs">`+Object.keys(TABN).map(k=>`<button class="tab${k===shopTab?' on':''}" onclick="shop('${k}')">${TABN[k]}</button>`).join('')+'</div>';
+  SH[shopTab].forEach(([id,n,p])=>{
+    const r=shopTab==='bonus'?p+' 🪙':(S.own.includes(id)?(S[KEY[shopTab]]===id?'✓ выбрано':'выбрать'):p+' 🪙');
+    h+=`<button class="item" onclick="buy('${shopTab}','${id}')">${n}<b>${r}</b></button>`;
+  });
+  modal(h+`<button class="sm" onclick="closeModal()">Закрыть</button>`);
+}
+function buy(c,id){
+  const p=SH[c].find(x=>x[0]===id)[2];
+  if(c!=='bonus'&&S.own.includes(id)){S[KEY[c]]=id;SFX.ui()}
+  else{
+    if(S.coins<p){toast('Не хватает монет');SFX.bad();return}SFX.coin();
+    S.coins-=p;
+    if(c==='bonus'){const m=id.match(/(hint|tube)(\d+)/);S.inv[m[1]]+=+m[2]}else{S.own.push(id);S[KEY[c]]=id}
+  }
+  COLORS=PAL[S.pal]||PAL.def;skin();save();coinsUI();shop();
+  if(!$('app').classList.contains('off'))render();
+}
+
+/* ---------- таблица лидеров ---------- */
+function lb(){
+  modal(`<h2>Лидеры</h2><p>Ваши очки: ★ ${S.score}</p><div id="lbl">Загрузка…</div><button class="sm" onclick="closeModal()">Закрыть</button>`);
+  if(!ysdk){$('lbl').textContent='Таблица лидеров работает в игре на Яндекс Играх.';return}
+  const show=(r,login)=>{$('lbl').innerHTML=(r.entries.map(e=>`<div class="row"><span data-nt>${e.rank}. ${esc(e.player.publicName||L('Игрок'))}</span><b>${e.score}</b></div>`).join('')||'Пока никого нет')+(login?'<button class="sm" onclick="login()">Войти, чтобы попасть в таблицу</button>':'')};
+  ysdk.leaderboards.getEntries('score',{quantityTop:10,includeUser:true,quantityAround:2}).then(r=>show(r,false))
+   .catch(()=>ysdk.leaderboards.getEntries('score',{quantityTop:10}).then(r=>show(r,true)).catch(()=>{$('lbl').textContent='Не удалось загрузить таблицу. Попробуйте позже.'}));
+}
+function login(){try{ysdk.auth.openAuthDialog().then(()=>{submit();lb()}).catch(()=>{})}catch(e){}}
+
+/* ---------- заставка FxGame и старт ---------- */
+const setP=v=>{$('sbar').style.width=(v*100)+'%'};
+const splashDone=()=>new Promise(r=>{
+  setTimeout(()=>{setP(1);setTimeout(()=>{const e=$('splash');e.classList.add('out');setTimeout(()=>e.remove(),600);r()},350)},Math.max(0,1700-performance.now()));
+});
+async function boot(){
+  setTimeout(()=>setP(.3),80);
+  if(window.YaGames){
+    try{
+      ysdk=await YaGames.init();setP(.6);
+      try{const r=await ysdk.shortcut.canShowPrompt();canShortcut=!!(r&&r.canShow)}catch(e){}
+      try{lang=pick(ysdk.environment.i18n.lang)}catch(e){}
+      try{
+        player=await ysdk.getPlayer({scopes:false});
+        const d=await player.getData(['s']),c=d&&d.s;
+        if(c&&(c.ts||0)>(S.ts||0)){Object.assign(S,c);COLORS=PAL[S.pal]||PAL.def}
+      }catch(e){}
+    }catch(e){}
+  }
+  setP(.85);
+  ['lagoon','glass','def'].forEach(x=>{if(!S.own.includes(x))S.own.push(x)});
+  if(!BG[S.bg])S.bg='lagoon';if(!TB[S.tb])S.tb='glass';if(!PAL[S.pal])S.pal='def';
+  skin();i18n();menu();
+  await splashDone();
+  if(canClaim())calendar();
+  try{ysdk&&ysdk.features.LoadingAPI&&ysdk.features.LoadingAPI.ready()}catch(e){}
+  submit();
+}
+boot();
+(function(){
+  if(matchMedia('(display-mode: standalone)').matches||navigator.standalone)return;
+  let dip=null;const show=()=>{canShortcut=true;$('scut').classList.remove('off')};
+  addEventListener('beforeinstallprompt',e=>{e.preventDefault();dip=e;show()});
+  if(/iphone|ipad|ipod/i.test(navigator.userAgent))show();
+  window.shortcut=()=>{
+    if(dip){dip.prompt();dip.userChoice.finally(()=>{dip=null;canShortcut=false;$('scut').classList.add('off')})}
+    else modal('<h2>Установка</h2><p>Нажмите кнопку «Поделиться» внизу экрана Safari, затем выберите «На экран Домой».</p><button class="sm" onclick="closeModal()">Понятно</button>');
+  };
+})();
+if("serviceWorker"in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body>
+</html>
